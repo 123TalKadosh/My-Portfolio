@@ -36,17 +36,22 @@ date: "2023-12-24"
 
 #### 1.1: About the report
 
-This report delves into the critical issue of global warming, examining the current trajectory of temperature changes across different continents. The data utilized in this report provides insights into the rate of temperature increase based on the assumption that industrialization remains at its current pace. The goal is to shed light on the potential consequences and encourage discussions surrounding sustainable practices.
+This report delves into the critical issue of global warming, examining the current trajectory of temperature changes across different
+continents. The data utilized in this report provides insights into the rate of temperature increase based on the assumption that
+industrialization remains at its current pace. The goal is to shed light on the potential consequences and encourage discussions
+surrounding sustainable practices.
 
 #### 1.2: The leading questions
 
 The analysis centers around two key questions:
 
 1\. How is Global Warming Evident in Temperature Trends?
-Explore the observed trends in temperature changes across continents, focusing on the monthly variations and identifying any discernible patterns.
+Explore the observed trends in temperature changes across continents, focusing on the monthly variations and identifying any discernible
+patterns.
 
 2\. Theoretical Scenario: Halted Industrialization.
-Imagine a hypothetical scenario where industrialization ceases to increase and remains stable as it is today. What are the potential implications for temperature changes globally?
+Imagine a hypothetical scenario where industrialization ceases to increase and remains stable as it is today. What are the potential
+implications for temperature changes globally?
 
 ------------------------------------------------------------------------
 
@@ -54,7 +59,9 @@ Imagine a hypothetical scenario where industrialization ceases to increase and r
 
 #### 2.1: Data source
 
-The data was extracted from ["Berkeley Earth"](https://berkeleyearth.org). Berkeley Earth offers high-resolution land and ocean time series data as well as gridded temperature data. Global datasets are available starting from 1850, and some land-only areas have records dating back to 1750.
+The data was extracted from ["Berkeley Earth"](https://berkeleyearth.org). Berkeley Earth offers high-resolution land and ocean time seried
+data as well as gridded temperature data. Global datasets are available starting from 1850, and some land-only areas have records dating
+back to 1750.
 
 #### 2.2: Data credibility by "ROCCC" model
 
@@ -76,7 +83,9 @@ In general, Berkeley Earth’s data is licensed under Creative Commons BY-NC 4.0
 
 ### Data processing
 
-Effective data processing is a pivotal aspect of any comprehensive report. It involves the systematic collection, validation, and analysis of information to derive meaningful insights and support informed decision-making. This section will delve into the significance of data processing within the context of the report, highlighting its role in ensuring accuracy, reliability, and relevance.
+Effective data processing is a pivotal aspect of any comprehensive report. It involves the systematic collection, validation, and analysis
+of information to derive meaningful insights and support informed decision-making. This section will delve into the significance of data
+processing within the context of the report, highlighting its role in ensuring accuracy, reliability, and relevance.
 
 Installs necessary R packages such as readr, tidyverse, dplyr, ggplot2, and ggpmisc to facilitate data manipulation and visualization.
 
@@ -99,7 +108,8 @@ Read the dataset from a CSV file.
 GlobalTMP <- read_csv("Desktop/GlobalLandTemperaturesByCountry.csv")
 ```
 
-Duplicate rows and rows with missing values (NA) are identified and eliminated to ensure data completeness and accuracy for subsequent analyses. Starting with 577,462 rows, the dataset is reduced to 544,811 after cleaning.
+Duplicate rows and rows with missing values (NA) are identified and eliminated to ensure data completeness and accuracy for subsequent
+analyses. Starting with 577,462 rows, the dataset is reduced to 544,811 after cleaning.
 
 ```{}
 GlobalTMP %>% distinct()
@@ -128,7 +138,8 @@ GlobalTMP <- GlobalTMP %>%
          Year = as.numeric(Year)) 
 ```
 
-Creating a new dataframe named "ContinentTMP" by extracting and filtering data from the original "GlobalTMP" dataframe to include only information related to the specified continents.
+Creating a new dataframe named "ContinentTMP" by extracting and filtering data from the original "GlobalTMP" dataframe to include only
+information related to the specified continents.
 
 ```{}
 ContinentTMP <- data.frame(GlobalTMP %>% 
@@ -183,7 +194,11 @@ ContinentTMP <- data.frame(GlobalTMP %>%
 
 ### Data analysis and visualization
 
-For each month, the code generates distinct visualizations portraying the temperature change over the years for different continents. These visualizations include scatter plots, trend lines, and linear regression equations, presented in separate facets for each continent. Additional aesthetic elements and labels are incorporated to enhance clarity and interpretation. Each chart features a trend line equation in the format of y=n+m*x, where 'm' represents the slope, indicating the change in temperature in degrees Celsius per year. The x-axis represents years, while the y-axis represents Celsius temperatures.
+For each month, the code generates distinct visualizations portraying the temperature change over the years for different continents. These
+visualizations include scatter plots, trend lines, and linear regression equations, presented in separate facets for each continent.
+Additional aesthetic elements and labels are incorporated to enhance clarity and interpretation. Each chart features a trend line equation
+in the format of y=n+m*x, where 'm' represents the slope, indicating the change in temperature in degrees Celsius per year. The x-axis
+represents years, while the y-axis represents Celsius temperatures.
 
 ```{}
 ContinentTMP %>%
@@ -441,7 +456,9 @@ ContinentTMP %>%
 
 ```
 
-I aggregated the slopes ('m') from the temperature change charts for each continent and month, meticulously summarizing them into a new data frame. This meticulous process aimed to offer a comprehensive overview of the data, paving the way for insightful observations and meaningful conclusions.
+I aggregated the slopes ('m') from the temperature change charts for each continent and month, meticulously summarizing them into a new
+data frame. This meticulous process aimed to offer a comprehensive overview of the data, paving the way for insightful observations and
+meaningful conclusions.
 
 ```{}
 temperature_data <- data.frame(
@@ -470,7 +487,8 @@ temperature_data <- data.frame(
 temperature_data_long <- gather(temperature_data, key = "Continent", value = "Temperature", -Month)
 ```
 
-Certainly, visualizations often provide a clearer understanding of data. To better comprehend the results from the aggregated slopes, two charts were created to visually represent the insights and conclusions derived from the data.
+Certainly, visualizations often provide a clearer understanding of data. To better comprehend the results from the aggregated slopes, two
+charts were created to visually represent the insights and conclusions derived from the data.
 
 ```{}
 ##Reshape the data frame to long format
@@ -531,22 +549,31 @@ ggplot(temperature_data_long, aes(x = factor(Month, levels = month.name), y = Te
 
 #### 5.1: Conclusion of my analysis
 
-The analyzed data, presented through linear trends, offers insights into the current climatic reality if the trend influenced by the last 250 years continues unchanged in strength. Relying on the assumption that current global behaviors related to industrialization and modernization remain unchanged is incorrect. However, for the purpose of the current data analysis, we will focus on it. Other studies in the field indicate an exponential increase in temperature as human development progresses.
+The analyzed data, presented through linear trends, offers insights into the current climatic reality if the trend influenced by the last
+250 years continues unchanged in strength. Relying on the assumption that current global behaviors related to industrialization and
+modernization remain unchanged is incorrect. However, for the purpose of the current data analysis, we will focus on it. Other studies in
+the field indicate an exponential increase in temperature as human development progresses.
 
 After saying that, we can draw several conclusions:
 
-1\. **Overall Increase:** The slopes (m) for all the months and continents are positive, indicating an overall increase in temperature over the months.
+1\. **Overall Increase:** The slopes (m) for all the months and continents are positive, indicating an overall increase in temperature over
+the months.
 The overall trend suggests a warming climate.
 
-2\. **Seasonal Patterns:** There are variations in the slopes across months, suggesting seasonal patterns. For some continents, certain months show a more significant increase than others, indicating potential seasonal variability.
+2\. **Seasonal Patterns:** There are variations in the slopes across months, suggesting seasonal patterns. For some continents, certain
+months show a more significant increase than others, indicating potential seasonal variability.
 
-3\. **Consistent Trends:** Generally, the trends are consistent across continents, with positive slopes for all months. This consistency implies a global or at least hemispheric influence on temperature changes.
+3\. **Consistent Trends:** Generally, the trends are consistent across continents, with positive slopes for all months. This consistency
+implies a global or at least hemispheric influence on temperature changes.
 
-4\. **Regional Anomalies:** Some months or continents may exhibit anomalies or deviations from the overall trend. For instance, the month of July in Europe has a relatively lower slope compared to other months, indicating a potential anomaly.
+4\. **Regional Anomalies:** Some months or continents may exhibit anomalies or deviations from the overall trend. For instance, the month
+of July in Europe has a relatively lower slope compared to other months, indicating a potential anomaly.
 
-5\. **Variability Across Continents:** Different continents exhibit varying rates of temperature change. For instance, South America generally has higher slopes compared to other continents, indicating a relatively larger increase in temperature over the years.
+5\. **Variability Across Continents:** Different continents exhibit varying rates of temperature change. For instance, South America
+generally has higher slopes compared to other continents, indicating a relatively larger increase in temperature over the years.
 
-6\. **Continental Differences:** Each continent has its own unique pattern of temperature change, influenced by local climatic factors and geographical features.
+6\. **Continental Differences:** Each continent has its own unique pattern of temperature change, influenced by local climatic factors and
+geographical features.
 Asia and North America, for example, consistently show higher temperature increases compared to other continents.
 
 
@@ -554,9 +581,17 @@ Asia and North America, for example, consistently show higher temperature increa
 
 ##### 1. How is Global Warming Evident in Temperature Trends?
 
-The observed temperature trends across continents provide compelling evidence of global warming. The positive slopes in the data indicate a consistent increase in temperatures over time. Monthly variations reveal distinct seasonal patterns, with some months experiencing more significant temperature changes than others. These patterns align with expectations of climate change, emphasizing the planet's overall warming trend.
+The observed temperature trends across continents provide compelling evidence of global warming. The positive slopes in the data indicate a
+consistent increase in temperatures over time. Monthly variations reveal distinct seasonal patterns, with some months experiencing more
+significant temperature changes than others. These patterns align with expectations of climate change, emphasizing the planet's overall
+warming trend.
 
 ##### 2. Theoretical Scenario: Halting Industrialization
 
-In a hypothetical scenario where industrialization ceases to increase, the potential implications for temperature changes globally and regionally would be significant. Without further industrial development, the exponential temperature growth associated with current practices would be curtailed. Nevertheless, even if the current trend continues linearly, in a hundred years, the temperature in September in Asia will rise by 1.0279 degrees Celsius. On the surface, it may appear negligible and meaningless, but in practice, it signifies a momentous change for the climate and the Earth. Experts point out that even a one-degree change in temperature can lead to an increase in the occurrence of extreme and dangerous natural phenomena.
+In a hypothetical scenario where industrialization ceases to increase, the potential implications for temperature changes globally and
+regionally would be significant. Without further industrial development, the exponential temperature growth associated with current
+practices would be curtailed. Nevertheless, even if the current trend continues linearly, in a hundred years, the temperature in September
+in Asia will rise by 1.0279 degrees Celsius. On the surface, it may appear negligible and meaningless, but in practice, it signifies a
+momentous change for the climate and the Earth. Experts point out that even a one-degree change in temperature can lead to an increase in
+the occurrence of extreme and dangerous natural phenomena.
 
