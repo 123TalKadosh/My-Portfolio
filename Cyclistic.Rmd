@@ -39,13 +39,19 @@ date: "2023-12-17"
 
 #### 1.1: About the company
 
-Cyclistic operates a bike-share program in Chicago, USA, featuring an extensive fleet of over 5,800 bicycles and 600 docking stations. What distinguishes Cyclistic is its commitment to inclusivity, offering not only traditional bicycles but also reclining bikes, hand tricycles, and cargo bikes. This diversity caters to individuals with disabilities and those who may find it challenging to use a standard two-wheeled bike.
+Cyclistic operates a bike-share program in Chicago, USA, featuring an extensive fleet of over 5,800 bicycles and 600 docking stations. What distinguishes
+Cyclistic is its commitment to inclusivity, offering not only traditional bicycles but also reclining bikes, hand tricycles, and cargo bikes. This diversity
+caters to individuals with disabilities and those who may find it challenging to use a standard two-wheeled bike.
 
 #### 1.2: The business task
 
-Up until now, Cyclistic's marketing strategy has centered around creating general awareness and targeting a broad consumer base. The flexibility in pricing plans, offering options such as single-ride passes, full-day passes, and annual memberships, has been instrumental in achieving this. Customers opting for single-ride or full-day passes are categorized as casual riders, while those choosing annual memberships are considered Cyclistic members.
+Up until now, Cyclistic's marketing strategy has centered around creating general awareness and targeting a broad consumer base. The flexibility in pricing
+plans, offering options such as single-ride passes, full-day passes, and annual memberships, has been instrumental in achieving this. Customers opting for
+single-ride or full-day passes are categorized as casual riders, while those choosing annual memberships are considered Cyclistic members.
 
-Previous data analyses have revealed that annual members contribute significantly more to profitability compared to casual riders. Consequently, the current focus of the company is to transition occasional users into long-term subscribers. This report aims to compare the activity patterns of members and casual users, providing insights to formulate an effective marketing strategy for the identified market segment.
+Previous data analyses have revealed that annual members contribute significantly more to profitability compared to casual riders. Consequently, the current
+focus of the company is to transition occasional users into long-term subscribers. This report aims to compare the activity patterns of members and casual
+users, providing insights to formulate an effective marketing strategy for the identified market segment.
 
 #### 1.3: The leading questions
 
@@ -63,7 +69,9 @@ Three questions will guide the future marketing program:
 
 #### 2.1: Data source
 
-I will utilize Cyclistic's publicly accessible historical data stored on their cloud servers for this project. The data can be accessed [Here](https://divvy-tripdata.s3.amazonaws.com/index.html). My focus will be on the data spanning from December 2022 to November 2023, organized into 12 separate CSV files, each representing a specific month of the year.
+I will utilize Cyclistic's publicly accessible historical data stored on their cloud servers for this project. The data can be accessed [Here](https://divvy
+tripdata.s3.amazonaws.com/index.html). My focus will be on the data spanning from December 2022 to November 2023, organized into 12 separate CSV files, each
+representing a specific month of the year.
 
 #### 2.2: Data credibility by "ROCCC" model
 
@@ -85,7 +93,9 @@ The data is maintained and made available by [Motivate International Inc](https:
 
 ### Data processing
 
-Effective data processing is a pivotal aspect of any comprehensive report. It involves the systematic collection, validation, and analysis of information to derive meaningful insights and support informed decision-making. This section will delve into the significance of data processing within the context of the report, highlighting its role in ensuring accuracy, reliability, and relevance.
+Effective data processing is a pivotal aspect of any comprehensive report. It involves the systematic collection, validation, and analysis of information to
+derive meaningful insights and support informed decision-making. This section will delve into the significance of data processing within the context of the
+report, highlighting its role in ensuring accuracy, reliability, and relevance.
 
 Installs and loads essential R packages, including "readr," "tidyverse," "dplyr," and "ggplot2," to facilitate data processing and visualizatio
 
@@ -117,7 +127,8 @@ y2023_10 <- read.csv("Desktop/Cyclistic/202310-divvy-tripdata.csv")
 y2023_11 <- read.csv("Desktop/Cyclistic/202311-divvy-tripdata.csv")
 ```
 
-Addresses data type inconsistencies for the start_station_id and end_station_id columns across multiple months, ensuring numerical consistency for subsequent analyses.
+Addresses data type inconsistencies for the start_station_id and end_station_id columns across multiple months, ensuring numerical consistency for subsequent
+analyses.
 
 ```         
 y2022_12 <- mutate(y2022_12, start_station_id = as.numeric(start_station_id), end_station_id = as.numeric(end_station_id))
@@ -306,11 +317,15 @@ y2023 %>%
   scale_fill_manual(values = c("casual" = "red", "member" = "turquoise")) +
   theme_minimal()
 ```
-The conclusion drawn from the significant difference in average ride times between casual and member riders (25.27 minutes for casual riders and 12.55 minutes for members) could be indicative of distinct usage patterns or preferences between these two user groups:
+The conclusion drawn from the significant difference in average ride times between casual and member riders (25.27 minutes for casual riders and 12.55
+minutes for members) could be indicative of distinct usage patterns or preferences between these two user groups:
 
-1. Casual Riders: The longer average ride time for casual riders (25 minutes) might suggest that they use the bike-sharing service for leisurely or recreational purposes. Casual riders may be more inclined to explore the city, take scenic routes, or engage in extended rides.
+1. Casual Riders: The longer average ride time for casual riders (25 minutes) might suggest that they use the bike-sharing service for leisurely or
+recreational purposes. Casual riders may be more inclined to explore the city, take scenic routes, or engage in extended rides.
 
-2. Member Riders: The shorter average ride time for members (12.5 minutes) could imply that members tend to use the bike-sharing service for more utilitarian purposes, such as commuting or short-distance travel. Members may be familiar with the system and may primarily use it for efficient point-to-point transportation.
+2. Member Riders: The shorter average ride time for members (12.5 minutes) could imply that members tend to use the bike-sharing service for more utilitarian
+purposes, such as commuting or short-distance travel. Members may be familiar with the system and may primarily use it for efficient point-to-point
+transportation.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 ##Viz of the Average Ride time for Casual and Member Riders by Weekday
@@ -346,7 +361,8 @@ y2023 %>%
   theme_minimal() +
   scale_x_discrete(limits = c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"))
 ```
-The data suggests that casual riders exhibit a more pronounced change in behavior during weekends, engaging in longer and more variable rides, while member riders maintain a more consistent and utilitarian approach to bike-sharing, with minor fluctuations in ride duration. 
+The data suggests that casual riders exhibit a more pronounced change in behavior during weekends, engaging in longer and more variable rides, while member
+riders maintain a more consistent and utilitarian approach to bike-sharing, with minor fluctuations in ride duration. 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 ##Viz of the Number of Total Rides for Casual and Member
@@ -381,7 +397,8 @@ y2023 %>%
   scale_x_discrete(limits = c("casual", "member")) +
   scale_y_continuous(labels = scales::comma)
 ```
-The significantly higher number of total rides for members (596,389) compared to casual riders (410,549) indicates a substantial disparity in the frequency of bike-sharing usage. Members, likely utilizing the service for regular commuting or routine activities, demonstrate a higher volume of transactions. 
+The significantly higher number of total rides for members (596,389) compared to casual riders (410,549) indicates a substantial disparity in the frequency
+of bike-sharing usage. Members, likely utilizing the service for regular commuting or routine activities, demonstrate a higher volume of transactions. 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 ##Viz of the Number of Rides for Casual and Member Riders by Weekday
@@ -412,7 +429,9 @@ y2023 %>%
   theme_minimal() +
   scale_x_discrete(limits = c("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"))
 ```
-The analysis reveals divergent riding day preferences between member and casual riders. Member riders exhibit a consistent trend, favoring weekdays—Monday through Thursday—suggesting a utilitarian approach, possibly for commuting. In contrast, casual riders show a distinct preference for Thursday through Sunday, with a notable emphasis on Saturday and Sunday. This pattern implies a recreational or leisure-oriented usage during the weekend. 
+The analysis reveals divergent riding day preferences between member and casual riders. Member riders exhibit a consistent trend, favoring weekdays—Monday
+through Thursday—suggesting a utilitarian approach, possibly for commuting. In contrast, casual riders show a distinct preference for Thursday through
+Sunday, with a notable emphasis on Saturday and Sunday. This pattern implies a recreational or leisure-oriented usage during the weekend. 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 ##Viz of the Number of Rides for Casual and Member Riders by Month
@@ -443,11 +462,16 @@ y2023 %>%
 ```
 The observed patterns in the number of rides by month for both member and casual riders reveal interesting trends:
 
-1. **Member Riders-** Members demonstrate a clear seasonality in bike-sharing, with peak ride counts during the warmer months, specifically in May, June, July, and August. Conversely, there is a notable decline in bike-sharing usage during the winter months (December, January, February, March), reflecting a seasonal decrease likely influenced by colder weather conditions.
+1. **Member Riders-** Members demonstrate a clear seasonality in bike-sharing, with peak ride counts during the warmer months, specifically in May, June,
+July, and August. Conversely, there is a notable decline in bike-sharing usage during the winter months (December, January, February, March), reflecting a
+seasonal decrease likely influenced by colder weather conditions.
 
-2. **Casual Riders-** Casual riders exhibit a pronounced preference for summer months (June, July, August, September), emphasizing a peak in bike-sharing activity during warmer weather. Notably, the larger seasonal gap in casual riders' usage patterns, in contrast to members, suggests heightened sensitivity to seasonal variations and potential influence from weather-dependent recreational activities.
+2. **Casual Riders-** Casual riders exhibit a pronounced preference for summer months (June, July, August, September), emphasizing a peak in bike-sharing
+activity during warmer weather. Notably, the larger seasonal gap in casual riders' usage patterns, in contrast to members, suggests heightened sensitivity to
+seasonal variations and potential influence from weather-dependent recreational activities.
 
-Members and casual riders both exhibit a seasonality in their bike-sharing behavior, with peaks during the warmer months. However, casual riders, being more sensitive to seasonality, show a larger gap between the highest and lowest months, potentially influenced by weather-dependent recreational usage. 
+Members and casual riders both exhibit a seasonality in their bike-sharing behavior, with peaks during the warmer months. However, casual riders, being more
+sensitive to seasonality, show a larger gap between the highest and lowest months, potentially influenced by weather-dependent recreational usage. 
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 ##Viz of Top 10 Start Stations for Casual Riders by Total Rides
@@ -487,7 +511,11 @@ y2023 %>%
   scale_fill_manual(values = rainbow(10))
 ```
 
-The identified top ten stations for casual riders, with "Streeter Dr & Grand Ave" and "DuSable Lake Shore Dr & Monroe St" leading by a significant margin, may suggest specific points of interest or popular destinations for casual riders. These stations could be strategically located near tourist attractions, recreational areas, or cultural landmarks, attracting a higher volume of casual users. The notable gap between the first and second stations compared to the rest may indicate a concentrated concentration of recreational or tourist activities in the vicinity of these two locations, reinforcing their prominence in the preferences of casual riders.
+The identified top ten stations for casual riders, with "Streeter Dr & Grand Ave" and "DuSable Lake Shore Dr & Monroe St" leading by a significant margin,
+may suggest specific points of interest or popular destinations for casual riders. These stations could be strategically located near tourist attractions,
+recreational areas, or cultural landmarks, attracting a higher volume of casual users. The notable gap between the first and second stations compared to the
+rest may indicate a concentrated concentration of recreational or tourist activities in the vicinity of these two locations, reinforcing their prominence in
+the preferences of casual riders.
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
 ##Viz of Top 10 Start Stations for Member Riders by Total Rides
@@ -527,7 +555,11 @@ y2023 %>%
   scale_fill_manual(values = rainbow(10))
 ```
 
-The relatively uniform distribution and small gaps among the top ten stations for member riders, suggest a more evenly spread utilization pattern. This could be indicative of members using bike-sharing services for commuting or routine activities across various neighborhoods throughout the city. The absence of pronounced gaps may signify that members are not concentrated around specific landmarks or attractions, reinforcing the notion that their bike-sharing usage is more evenly distributed across different areas of Chicago for everyday purposes. This pattern aligns with the expected behavior of members who are likely utilizing bike-sharing as a convenient and efficient means of transportation for regular activities.
+The relatively uniform distribution and small gaps among the top ten stations for member riders, suggest a more evenly spread utilization pattern. This could
+be indicative of members using bike-sharing services for commuting or routine activities across various neighborhoods throughout the city. The absence of
+pronounced gaps may signify that members are not concentrated around specific landmarks or attractions, reinforcing the notion that their bike-sharing usage
+is more evenly distributed across different areas of Chicago for everyday purposes. This pattern aligns with the expected behavior of members who are likely
+utilizing bike-sharing as a convenient and efficient means of transportation for regular activities.
 
 ------------------------------------------------------------------------
 
@@ -538,32 +570,43 @@ The relatively uniform distribution and small gaps among the top ten stations fo
 Throughout the analysis of bike-sharing data in Chicago, several key conclusions emerge:
 
 1. **Ride Duration Differences:**
-Casual riders, with an average ride time of 25 minutes, showcase a more leisure-oriented and variable usage pattern compared to members, who have an average ride time of 12.5 minutes, suggesting utilitarian and routine-based behavior.
+Casual riders, with an average ride time of 25 minutes, showcase a more leisure-oriented and variable usage pattern compared to members, who have an average
+ride time of 12.5 minutes, suggesting utilitarian and routine-based behavior.
 
 2. **Weekly Riding Patterns:**
-Casual riders exhibit a substantial increase in average ride time during weekends, with an almost 8-minute difference from midweek, while members maintain a more consistent pattern, indicating potential recreational usage by casual riders during weekends.
+Casual riders exhibit a substantial increase in average ride time during weekends, with an almost 8-minute difference from midweek, while members maintain a
+more consistent pattern, indicating potential recreational usage by casual riders during weekends.
 
 3. **Total Ride Counts:**
-Members significantly outnumber casual riders in total ride counts (596,389 vs. 410,549), highlighting the higher frequency of bike-sharing usage among members, likely for commuting or routine activities.
+Members significantly outnumber casual riders in total ride counts (596,389 vs. 410,549), highlighting the higher frequency of bike-sharing usage among
+members, likely for commuting or routine activities.
 
 4. **Seasonal Trends:**
-Both casual and member riders show a preference for bike-sharing during the warmer months, with a larger seasonal gap in casual riders' usage patterns, indicating heightened sensitivity to seasonal variations and recreational activities.
+Both casual and member riders show a preference for bike-sharing during the warmer months, with a larger seasonal gap in casual riders' usage patterns,
+indicating heightened sensitivity to seasonal variations and recreational activities.
 
 5. **Preferred Riding Days:**
-Members favor weekdays, particularly Monday through Thursday, suggesting utilitarian usage for commuting, while casual riders prefer the latter part of the week, especially weekends, indicating a more leisure-oriented and recreational approach.
+Members favor weekdays, particularly Monday through Thursday, suggesting utilitarian usage for commuting, while casual riders prefer the latter part of the
+week, especially weekends, indicating a more leisure-oriented and recreational approach.
 
 6. **Station Preferences:**
-Top stations for casual riders, such as "Streeter Dr & Grand Ave", may be strategically located near tourist attractions, cultural landmarks, or recreational areas, while the more uniform distribution of top stations for members suggests even utilization across various neighborhoods for routine activities.
+Top stations for casual riders, such as "Streeter Dr & Grand Ave", may be strategically located near tourist attractions, cultural landmarks, or recreational
+areas, while the more uniform distribution of top stations for members suggests even utilization across various neighborhoods for routine activities.
 
-These conclusions provide valuable insights for targeted marketing, service enhancements, and resource allocation to better meet the distinct needs and behaviors of casual and member riders in the Chicago bike-sharing system.
+These conclusions provide valuable insights for targeted marketing, service enhancements, and resource allocation to better meet the distinct needs and
+behaviors of casual and member riders in the Chicago bike-sharing system.
 
 #### 5.2: Recommendations based on my data analysis
 
 1. **How do annual members and casual riders use Cyclistic bikes dierently?**
-Annual members exhibit more consistent and utilitarian usage, likely for commuting or routine activities, with shorter average ride times (12.5 minutes). Casual riders, with longer average ride times (25 minutes), show a more variable and leisure-oriented pattern.
+Annual members exhibit more consistent and utilitarian usage, likely for commuting or routine activities, with shorter average ride times (12.5 minutes).
+Casual riders, with longer average ride times (25 minutes), show a more variable and leisure-oriented pattern.
 
 2. **Why would casual riders buy Cyclistic annual?**
-Position Cyclistic annual memberships as a cost-effective and convenient option for casual riders who frequent the service, especially during the summer peak. Emphasize benefits like unlimited rides and discounts for longer-term commitments.
+Position Cyclistic annual memberships as a cost-effective and convenient option for casual riders who frequent the service, especially during the summer
+peak. Emphasize benefits like unlimited rides and discounts for longer-term commitments.
 
 3. **How can Cyclistic use digital media to infuence casual riders to become members?**
-Launch targeted digital media campaigns highlighting the advantages of Cyclistic annual memberships, such as cost savings and seamless access. Leverage social media, online advertising, and influencers to reach casual riders during the summer peak, emphasizing the value and convenience of becoming annual members.
+Launch targeted digital media campaigns highlighting the advantages of Cyclistic annual memberships, such as cost savings and seamless access. Leverage
+social media, online advertising, and influencers to reach casual riders during the summer peak, emphasizing the value and convenience of becoming annual
+members.
