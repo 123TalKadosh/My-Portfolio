@@ -1,3 +1,5 @@
+To view the project and its visualizations more conveniently, you can click on the following link: 
+https://rpubs.com/TalKadosh/Cyclistic
 ---
 title: "Cyclistics"
 subtitle: By Tal Kadosh
