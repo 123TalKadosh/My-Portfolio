@@ -1,4 +1,4 @@
-# My Projects
+# Portfolio
 Welcome to my GitHub portfolio!
 
 Here, you'll find a collection of projects showcasing my skills in R, SQL, and Tableau. Each project is a testament to myproficiency in these areas and
