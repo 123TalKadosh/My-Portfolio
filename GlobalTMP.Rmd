@@ -1,5 +1,5 @@
 To read the project in a more convenient way and view the visualizations, you can click on the following link:
-#### (The Change in Temperature Across Continents)[https://rpubs.com/TalKadosh/ContinentTemperature]
+https://rpubs.com/TalKadosh/ContinentTemperature
 ---
 title: "The Change in Temperature Across Continents"
 output: html_document
