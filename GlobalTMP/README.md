@@ -7,4 +7,6 @@ insights. Additionally, continent-specific data analysis showcases the diverse e
 
 **Skills demonstrated:**
 R Programming, Data Wrangling, Data Visualization, Statistical Modeling.
+
+To read the project in a more convenient way and view the visualizations, you can click on the following link:
 ##### [Project 1 - R Markdown format](https://rpubs.com/TalKadosh/ContinentTemperature)
