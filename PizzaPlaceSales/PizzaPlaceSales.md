@@ -23,9 +23,11 @@
 
 3.  **Data processing**
 
-4.  **Data analysis and visualization**
+4.  **Data analysis**
 
-5.  **Findings**
+5.  **Data visualization**
+
+6.  **Findings**
 
     5.1 Conclusion of my analysis
 
@@ -195,7 +197,12 @@ FROM (
 
 ------------------------------------------------------------------------
 
-### Data analysis and visualization
+### Data analysis
+
+
+------------------------------------------------------------------------
+
+### Data visualization
 
 
 ------------------------------------------------------------------------
