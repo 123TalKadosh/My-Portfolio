@@ -37,23 +37,9 @@
 
 #### 1.1: The business task
 
-Up until now, Cyclistic's marketing strategy has centered around creating general awareness and targeting a broad consumer base. The flexibility in pricing
-plans, offering options such as single-ride passes, full-day passes, and annual memberships, has been instrumental in achieving this. Customers opting for
-single-ride or full-day passes are categorized as casual riders, while those choosing annual memberships are considered Cyclistic members.
-
-Previous data analyses have revealed that annual members contribute significantly more to profitability compared to casual riders. Consequently, the current
-focus of the company is to transition occasional users into long-term subscribers. This report aims to compare the activity patterns of members and casual
-users, providing insights to formulate an effective marketing strategy for the identified market segment.
 
 #### 1.2: The leading questions
 
-Three questions will guide the future marketing program:
-
-1\. How do annual members and casual riders use Cyclistic bikes dierently?
-
-2\. Why would casual riders buy Cyclistic annual?
-
-3\. How can Cyclistic use digital media to infuence casual riders to become members?
 
 ------------------------------------------------------------------------
 
@@ -85,12 +71,30 @@ The data is maintained and made available by [Motivate International Inc](https:
 
 ### Data processing
 
-This dataset contains four tables in CSV format that are connected to each other by primary keys:
+This dataset contains four tables in CSV format that are connected to each other by primary keys.
 
-1. order_details -
-2. orders - 
-3. pizza_prices -
-4. menu - 
+1. **order_details:**
+        order_details_id: A unique identifier for each order detail entry.
+        order_id: A unique identifier for each order.
+        pizza_id: A unique identifier for each pizza.
+        quantity: Represents the quantity of the specified pizza in the order detail.
+   
+2. **orders:**
+        order_id: A unique identifier for each order.
+        date: The date when the order was placed.
+        time: The time when the order was placed.
+   
+3. **pizza_prices:**
+        pizza_id: A unique identifier for each pizza.
+        pizza_type_id: Identifies the type of pizza.
+        size: Represents the size of the pizza.
+        price: Indicates the price associated with the specific pizza size.
+
+4. **menu:**
+        pizza_type_id: Identifies the type of pizza.
+        name: The name of the pizza.
+        category: Specifies the category to which the pizza belongs.
+        ingredients: Lists the ingredients used in the pizza.
 
 ### Data Cleaning
 
