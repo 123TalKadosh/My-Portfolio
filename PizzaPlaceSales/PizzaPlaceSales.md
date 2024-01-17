@@ -94,7 +94,10 @@ This dataset contains four tables in CSV format that are connected to each other
 
 ### Data Cleaning
 
-1. order_details:
+1. **order_details:**
+   
+The first query retrieves all distinct rows to identify any duplications. The second query checks for null values. After examining both, I discovered that
+the data in this table is suitable for use, with consistent row counts before and after these checks — 48,620 rows.
 
 ```sql         
 SELECT
@@ -102,8 +105,19 @@ SELECT
 FROM
   `tangential-box-405116.PizzaPlaceSales.order_details`
 ```
+```sql 
+SELECT *
+FROM `PizzaPlaceSales.order_details`
+WHERE order_details_id IS NULL
+   OR order_id IS NULL
+   OR pizza_id IS NULL
+   OR quantity IS NULL;
+```
 
-2. orders:
+2. **orders:**
+
+The same process was applied to the table as before, yielding consistent results. The data is deemed suitable, maintaining an unchanged number of rows both
+before and after the checks — 21,350 rows.
 
 ```sql         
 SELECT
@@ -111,14 +125,31 @@ SELECT
 FROM
   `tangential-box-405116.PizzaPlaceSales.orders`
 ```
-
-3. pizza_prices:
-
-```sql         
-
+```sql 
+SELECT *
+FROM `PizzaPlaceSales.orders`
+WHERE order_id IS NULL
+   OR date IS NULL
+   OR time IS NULL
 ```
 
-4. menu:
+3. **pizza_prices:**
+
+In this table, there are only 96 rows. Upon inspection, I confirmed the absence of any null values. Additionally, I executed a query to check for
+duplications, and the result remained consistent.
+
+```sql         
+SELECT
+  DISTINCT *
+FROM
+  `tangential-box-405116.PizzaPlaceSales.pizza_prices`
+```
+
+4. **menu:**
+
+In this table, there are 33 rows. Upon inspection, I confirmed the absence of any null values or duplications. Subsequently, I created a new table and
+modified its name. Each column header was changed to a meaningful name, and I removed the first row containing random values that could potentially disrupt
+subsequent analyses.
 
 ```sql         
 CREATE TABLE PizzaPlaceSales.menu AS
