@@ -1,6 +1,9 @@
 # Pizza Place Sales
+
 **By Tal Kadosh**
+
 **2024-01-17**
+
 -----------------------------------------------------------------------
 #### Table of Contents
 
@@ -82,11 +85,66 @@ The data is maintained and made available by [Motivate International Inc](https:
 
 ### Data processing
 
+This dataset contains four tables in CSV format that are connected to each other by primary keys:
 
+1. order_details -
+2. orders - 
+3. pizza_prices -
+4. menu - 
+
+### Data Cleaning
+
+1. order_details:
+
+```sql         
+SELECT
+  DISTINCT *
+FROM
+  `tangential-box-405116.PizzaPlaceSales.order_details`
+```
+
+2. orders:
+
+```sql         
+SELECT
+  DISTINCT *
+FROM
+  `tangential-box-405116.PizzaPlaceSales.orders`
+```
+
+3. pizza_prices:
+
+```sql         
+
+```
+
+4. menu:
+
+```sql         
+CREATE TABLE PizzaPlaceSales.menu AS
+SELECT
+  string_field_0 AS pizza_type_id,
+  string_field_1 AS name,
+  string_field_2 AS category,
+  string_field_3 AS ingredients
+FROM (
+  SELECT
+    * EXCEPT(row_number)
+  FROM (
+    SELECT
+      *,
+      ROW_NUMBER() OVER () AS row_number
+    FROM
+      `PizzaPlaceSales.pizza_types`
+  )
+  WHERE
+    row_number > 1
+);
+```
 
 ------------------------------------------------------------------------
 
-#### Data analysis and visualization
+### Data analysis and visualization
 
 
 ------------------------------------------------------------------------
