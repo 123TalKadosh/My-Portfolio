@@ -74,27 +74,43 @@ The data is maintained and made available by [Motivate International Inc](https:
 This dataset contains four tables in CSV format that are connected to each other by primary keys.
 
 1. **order_details:**
-        order_details_id: A unique identifier for each order detail entry.
-        order_id: A unique identifier for each order.
-        pizza_id: A unique identifier for each pizza.
-        quantity: Represents the quantity of the specified pizza in the order detail.
+
+    order_details_id: A unique identifier for each order detail entry.
+
+    order_id: A unique identifier for each order.
+   
+    pizza_id: A unique identifier for each pizza.
+   
+    quantity: Represents the quantity of the specified pizza in the order detail.
    
 2. **orders:**
-        order_id: A unique identifier for each order.
-        date: The date when the order was placed.
-        time: The time when the order was placed.
+
+   order_id: A unique identifier for each order.
+
+   date: The data when the order was placed.
+
+   time: The time when the order was placed.
    
 3. **pizza_prices:**
-        pizza_id: A unique identifier for each pizza.
-        pizza_type_id: Identifies the type of pizza.
-        size: Represents the size of the pizza.
-        price: Indicates the price associated with the specific pizza size.
+
+   pizza_id: A unique identifier for each pizza.
+
+   pizza_type_id: Identifies the type of pizza.
+
+   size: Represents the size of the pizza.
+   
+   price: Indicates the price associated with the specific pizza size.
 
 4. **menu:**
-        pizza_type_id: Identifies the type of pizza.
-        name: The name of the pizza.
-        category: Specifies the category to which the pizza belongs.
-        ingredients: Lists the ingredients used in the pizza.
+   
+   pizza_type_id: Identifies the type of pizza.
+   
+   name: The name of the pizza.
+   
+   category: Specifies the category to which the pizza belongs.
+   
+   ingredients: Lists the ingredients used in the pizza.
+   
 
 ### Data Cleaning
 
