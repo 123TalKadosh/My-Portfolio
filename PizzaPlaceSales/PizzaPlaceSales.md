@@ -42,6 +42,13 @@
 
 #### 1.2: The leading questions
 
+1. How many customers do we have each day? Are there any peak hours?
+
+2. How many pizzas are typically in an order? Do we have any bestsellers?
+
+3. How much money did we make this year? Can we indentify any seasonality in the sales?
+
+4. Are there any pizzas we should take of the menu, or any promotions we could leverage?
 
 ------------------------------------------------------------------------
 
@@ -192,13 +199,20 @@ FROM (
   )
   WHERE
     row_number > 1
-);
+)
 ```
 
 ------------------------------------------------------------------------
 
 ### Data analysis
 
+```sql
+SELECT
+   COUNT(date) AS total_orders,
+   ROUND(COUNT(date) / COUNT(DISTINCT date), 2) AS daily_orders_avg
+FROM
+   `PizzaPlaceSales.orders`
+```
 
 ------------------------------------------------------------------------
 
