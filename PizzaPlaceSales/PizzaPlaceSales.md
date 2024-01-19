@@ -206,6 +206,9 @@ FROM (
 
 ### Data analysis
 
+The initial inquiry from the customer is, **"How many customers do we have each day? Are there any peak hours?"** To address these questions, I formulated the
+following two queries:
+
 ```sql
 SELECT
    COUNT(date) AS total_orders,
@@ -213,6 +216,47 @@ SELECT
 FROM
    `PizzaPlaceSales.orders`
 ```
+We observe a total of 21,350 orders throughout the entire year, resulting in an average of 59.64 orders per day.
+
+```sql
+SELECT
+  EXTRACT(HOUR FROM time) AS hour_of_day,
+  COUNT(*) AS orders_count
+FROM
+  `PizzaPlaceSales.orders`
+GROUP BY
+  hour_of_day
+ORDER BY
+  orders_count DESC
+LIMIT 5;
+```
+The results of this query reveal the top 5 peak hours as follows: 12:00, 13:00, 18:00, 17:00, and 19:00, listed in ascending order.
+
+In order to answer the second question, **"How many pizzas are typically in an order? Do we have any bestsellers?"**, I will write two another queris: 
+
+```sql
+SELECT
+  ROUND (AVG(quantity), 2) AS average_pizzas_per_order
+FROM
+  `PizzaPlaceSales.order_details`
+```
+The results to this query show us that the average number of pizzas for each delivery are 1.02.
+
+```sql
+SELECT
+  pizza_id,
+  SUM(quantity) AS total_sold
+FROM
+  `PizzaPlaceSales.order_details`
+GROUP BY
+  pizza_id
+ORDER BY
+  total_sold DESC
+LIMIT 5;
+```
+
+
+
 
 ------------------------------------------------------------------------
 
