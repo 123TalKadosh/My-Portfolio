@@ -232,7 +232,7 @@ LIMIT 5;
 ```
 The results of this query reveal the top 5 peak hours as follows: 12:00, 13:00, 18:00, 17:00, and 19:00, listed in ascending order.
 
-In order to answer the second question, **"How many pizzas are typically in an order? Do we have any bestsellers?"**, I will write two another queris: 
+In order to answer the second question, **"How many pizzas are typically in an order? Do we have any bestsellers?"**, I wrote two another queris: 
 
 ```sql
 SELECT
@@ -254,6 +254,79 @@ ORDER BY
   total_sold DESC
 LIMIT 5;
 ```
+After running this query, we found out that the bestsellers pizzas are:
+1. big_meat_s - 1914
+2. thai_ckn_l - 1410
+3. five_cheese_l - 1409
+4. four_cheese_l - 1316
+5. classic_dlx_m -1181
+6. spicy_ital_l - 1109
+7. hawaiian_s - 1020
+8. southw_ckn_l - 1016
+9. bbq_ckn_l - 992
+10. bbq_ckn_m - 956
+
+The next question was **"How much money did we make this year? Can we indentify any seasonality in the sales?"**. in order to answer it, I wrote those querys:
+
+```sql
+SELECT
+  ROUND(SUM(od.quantity * pp.price),2) AS total_revenue
+FROM
+  `PizzaPlaceSales.pizza_prices` pp
+JOIN
+  `PizzaPlaceSales.order_details` od
+ON
+  od.pizza_id = pp.pizza_id
+```
+The total revenue of the entire year is 817,860.05$.
+
+```sql
+SELECT
+  EXTRACT(MONTH FROM date) AS month,
+  EXTRACT(YEAR FROM date) AS year,
+  COUNT(*) AS monthly_orders
+FROM
+  `PizzaPlaceSales.orders`
+GROUP BY
+  year, month
+ORDER BY
+  year, month;
+```
+After running this query, we recive those results:
+1. January - 1845
+2. February - 1685
+3. March - 1840
+4. April - 1799
+5. May - 1853
+6. June - 1773
+7. July - 1935
+8. August - 1841
+9. September - 1661
+10. October - 1646
+11. November - 1792
+12. December -1680
+
+In order to answer the last question, **"Are there any pizzas we should take of the menu, or any promotions we could leverage?"**, I ran this query:
+
+```sql
+SELECT
+  pizza_id,
+  SUM(quantity) AS total_sold
+FROM
+  `PizzaPlaceSales.order_details`
+GROUP BY
+  pizza_id
+ORDER BY
+  total_sold ASC
+LIMIT 5;
+```
+After running this query, we found out that the least ordered pizzas are:
+1. the_greek_xxl - 28
+2. green_garden_l - 95
+3. ckn_alfredo_s - 96
+4. calabrese_s - 99
+5. mexicana_s _ 162
+
 
 
 
