@@ -29,9 +29,9 @@
 
 6.  **Findings**
 
-    5.1 Conclusion of my analysis
+    5.1 Findings of my analysis
 
-    5.2 Recommendations based on my data analysis
+    5.2 Recommendations based on the analysis
 
 ------------------------------------------------------------------------
 
@@ -230,7 +230,20 @@ ORDER BY
   orders_count DESC
 LIMIT 5;
 ```
-The results of this query reveal the top 5 peak hours as follows: 12:00, 13:00, 18:00, 17:00, and 19:00, listed in ascending order.
+```SQL
+SELECT
+  EXTRACT(HOUR FROM time) AS hour_of_day,
+  COUNT(*) AS orders_count
+FROM
+  `PizzaPlaceSales.orders`
+GROUP BY
+  hour_of_day
+ORDER BY
+  orders_count ASC
+LIMIT 5;
+```
+The result of the first query reveal the top 5 hours as follows: 12:00, 13:00, 18:00, 17:00, and 19:00.
+The result of the second query reveal the least busy 5 hours as follows: 09:00, 10:00, 23:00, 22:00, and 21:00.
 
 In order to answer the second question, **"How many pizzas are typically in an order? Do we have any bestsellers?"**, I wrote two another queris: 
 
@@ -252,7 +265,7 @@ GROUP BY
   pizza_id
 ORDER BY
   total_sold DESC
-LIMIT 5;
+LIMIT 10;
 ```
 After running this query, we found out that the bestsellers pizzas are:
 1. big_meat_s - 1914
@@ -327,9 +340,77 @@ After running this query, we found out that the least ordered pizzas are:
 4. calabrese_s - 99
 5. mexicana_s _ 162
 
+To understant more the market needs, I examined some more ordering patterns.
 
+```sql
+WITH PizzaSizeCounts AS (
+  SELECT
+    pp.size,
+    COUNT(od.pizza_id) AS size_count
+  FROM
+    `PizzaPlaceSales.pizza_prices` pp
+  LEFT JOIN
+    `PizzaPlaceSales.order_details` od
+  ON
+    pp.pizza_id = od.pizza_id
+  GROUP BY
+    pp.size
+),
+TotalPizzaCount AS (
+  SELECT
+    COUNT(*) AS total_count
+  FROM
+    `PizzaPlaceSales.order_details`
+)
+SELECT
+  psc.size,
+  psc.size_count,
+  ROUND((psc.size_count / tpc.total_count) * 100, 2) AS percentage
+FROM
+  PizzaSizeCounts psc
+CROSS JOIN
+  TotalPizzaCount tpc;
+```
+This query shows us the customer preferences regarding the size of their pizza.
+1. L, 18526 Units, 38.1%
+2. M, 15385 Units, 31.64%
+3. S, 14137 Units, 29.08%
+4. XL, 544 Units, 1.12%
+5. XXL, 28 Units, 0.06%
 
+```sql
+WITH PizzaCounts AS (
+  SELECT
+    m.category,
+    COUNT(od.pizza_id) AS pizza_count
+  FROM
+    `PizzaPlaceSales.menu` m
+  LEFT JOIN
+    (
+      SELECT
+        LEFT(od.pizza_id, LENGTH(od.pizza_id) - 2) AS pizza_id,
+        od.quantity
+      FROM
+        `PizzaPlaceSales.order_details` od
+    ) od
+  ON
+    m.pizza_type_id = od.pizza_id
+  GROUP BY
+    m.category
+)
 
+SELECT
+  category,
+  pizza_count,
+  ROUND(pizza_count / NULLIF((SELECT COUNT(*) FROM `PizzaPlaceSales.order_details`), 0), 4) * 100 AS percentage
+FROM
+  PizzaCounts;
+  ```
+From this query we can learn the customer preferences regarding the pizza type:
+1. Veggie, 11449 Units, 23.55%
+2. Classic, 14007 Units, 28.81%
+3. Supreme, 11777 Units, 24.22%
+4. Chicken, 10815 Units, 22.24%
 
 ------------------------------------------------------------------------
 
@@ -340,48 +421,45 @@ After running this query, we found out that the least ordered pizzas are:
 
 ### Findings
 
-#### 5.1: Conclusion of my analysis
+#### 5.1: Findings of my analysis
 
-Throughout the analysis of bike-sharing data in Chicago, several key conclusions emerge:
+Throughout the analysis, several key findings emerge:
 
-1. **Ride Duration Differences:**
-Casual riders, with an average ride time of 25 minutes, showcase a more leisure-oriented and variable usage pattern compared to members, who have an average
-ride time of 12.5 minutes, suggesting utilitarian and routine-based behavior.
+1. **Order and Sales Pattern-** The business observes a total of 21,350 orders throughout the year, averaging approximately 59.64 orders per day.
+The top 5 peak hours for orders are identified as 12:00, 13:00, 18:00, 17:00, and 19:00.
+Conversely, the least busy 5 hours are at 09:00, 10:00, 23:00, 22:00, and 21:00.
 
-2. **Weekly Riding Patterns:**
-Casual riders exhibit a substantial increase in average ride time during weekends, with an almost 8-minute difference from midweek, while members maintain a
-more consistent pattern, indicating potential recreational usage by casual riders during weekends.
+2. **Bestsellers and Revenue-** The best-selling pizzas include "big_meat_s", "thai_ckn_l", "five_cheese_l", and others. The total revenue for the entire
+year amounted to $817,860.05.
 
-3. **Total Ride Counts:**
-Members significantly outnumber casual riders in total ride counts (596,389 vs. 410,549), highlighting the higher frequency of bike-sharing usage among
-members, likely for commuting or routine activities.
+3. **Monthly Sales-** Monthly sales fluctuate, with July having the highest pizza sales (1935 units) and September having the lowest (1661 units).
 
-4. **Seasonal Trends:**
-Both casual and member riders show a preference for bike-sharing during the warmer months, with a larger seasonal gap in casual riders' usage patterns,
-indicating heightened sensitivity to seasonal variations and recreational activities.
+4. **Least Ordered Pizzas-** The pizzas with the least orders include "the_greek_xxl," "green_garden_l," "ckn_alfredo_s," "calabrese_s," and "mexicana_s."
 
-5. **Preferred Riding Days:**
-Members favor weekdays, particularly Monday through Thursday, suggesting utilitarian usage for commuting, while casual riders prefer the latter part of the
-week, especially weekends, indicating a more leisure-oriented and recreational approach.
+5. **Customer Preferences-** Size Preferences: Large (L) pizzas are the most popular, accounting for 38.1% of sales, followed by Medium (M) at 31.64%, Small
+(S) at 29.08%, XL at 1.12%, and XXL at 0.06%.
 
-6. **Station Preferences:**
-Top stations for casual riders, such as "Streeter Dr & Grand Ave", may be strategically located near tourist attractions, cultural landmarks, or recreational
-areas, while the more uniform distribution of top stations for members suggests even utilization across various neighborhoods for routine activities.
+6. **Type Preferences-** The most preferred pizza types by the following order are "Classic", "Supreme," "Veggie" and "Chicken".
 
-These conclusions provide valuable insights for targeted marketing, service enhancements, and resource allocation to better meet the distinct needs and
-behaviors of casual and member riders in the Chicago bike-sharing system.
+#### 5.2: Recommendations based on the analysis
+After presenting the conclusions, here are some operational suggestions that can aid in their implementation:
 
-#### 5.2: Recommendations based on my data analysis
+1. **Happy Hour Promotion:**
+   Introduce a Happy Hour promotion during the identified least busy hours in the late evening and in the early morning to attract more customers. Offer
+   discounted prices, bundled deals, or special promotions to incentivize orders during traditionally slower times.
 
-1. **How do annual members and casual riders use Cyclistic bikes dierently?**
-Annual members exhibit more consistent and utilitarian usage, likely for commuting or routine activities, with shorter average ride times (12.5 minutes).
-Casual riders, with longer average ride times (25 minutes), show a more variable and leisure-oriented pattern.
+2. **Seasonal Specials:**
+   Capitalize on the observed increase in sales during the summer months by introducing seasonal specials or summer-themed pizzas. Highlight these offerings
+   through targeted marketing to boost sales during peak seasons.
 
-2. **Why would casual riders buy Cyclistic annual?**
-Position Cyclistic annual memberships as a cost-effective and convenient option for casual riders who frequent the service, especially during the summer
-peak. Emphasize benefits like unlimited rides and discounts for longer-term commitments.
+3. **Fall Sale Campaign:**
+   Implement a fall sale campaign during the weaker months from September to December. Offer promotions, discounts, or exclusive deals to stimulate customer
+   interest and increase sales during traditionally slower periods.
 
-3. **How can Cyclistic use digital media to infuence casual riders to become members?**
-Launch targeted digital media campaigns highlighting the advantages of Cyclistic annual memberships, such as cost savings and seamless access. Leverage
-social media, online advertising, and influencers to reach casual riders during the summer peak, emphasizing the value and convenience of becoming annual
-members.
+4. **Menu Optimization:**
+   Based on the analysis of bestsellers and least ordered pizzas, optimize the menu by emphasizing popular items and potentially removing or revamping less
+   popular ones. This can streamline operations and improve overall customer satisfaction.
+
+5. **Efficiency during Peak Hours:**
+   Optimize operations during peak hours to maximize efficiency. Consider streamlining processes, ensuring sufficient staff during busy times, and
+   implementing technologies to speed up order processing.
