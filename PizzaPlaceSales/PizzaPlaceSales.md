@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="Pizza Place Sales Project">
+  <meta property="og:description" content="Exploring the Perfect Fusion of SQL and Pizza Analytics">
+  <meta property="og:image" content="URL to an image representing your project">
+  <meta property="og:url" content="URL to the project or documentation">
+
 # Pizza Place Sales
 
 **By Tal Kadosh**
