@@ -15,21 +15,13 @@
 
 2.  **Data background**
 
-    2.1 Data source
-
-    2.2 Data credibility by "ROCCC" model
-
-    2.3 Data License
-
 3.  **Data processing**
 
 4.  **Data analysis**
 
-5.  **Data visualization**
+5.  **Findings**
 
-6.  **Findings**
-
-    5.1 Findings of my analysis
+    5.1 Analysis Findings
 
     5.2 Recommendations based on the analysis
 
@@ -39,6 +31,14 @@
 
 #### 1.1: The business task
 
+The business task is to conduct a comprehensive analysis of the pizza place's operations and customer interactions. This involves answering key questions
+such as understanding the daily customer count, identifying peak hours to optimize staff and resources, evaluating the average number of pizzas per order,
+and determining bestsellers to inform inventory and marketing strategies. Additionally, the financial performance over the year needs to be assessed to
+identify any patterns or seasonality in sales. Finally, the analysis aims to uncover opportunities for menu optimization by identifying underperforming
+pizzas and exploring potential promotions to drive customer engagement and boost sales.
+
+The overarching goal is to gain actionable insights that will enhance operational efficiency, improve customer satisfaction, and contribute to the overall
+success of the pizza business.
 
 #### 1.2: The leading questions
 
@@ -54,27 +54,8 @@
 
 ### Data background
 
-#### 2.1: Data source
-
-I will utilize Cyclistic's publicly accessible historical data stored on their cloud servers for this project. The data can be accessed [Here](https://divvy
-tripdata.s3.amazonaws.com/index.html). My focus will be on the data spanning from December 2022 to November 2023, organized into 12 separate CSV files, each
-representing a specific month of the year.
-
-#### 2.2: Data credibility by "ROCCC" model
-
-1.  **Reliability:** 
-
-2.  **Original:** The data is verified by its original source.
-
-3.  **Comprehensiveness:** It encompasses all essential information to address the queries.
-
-4.  **Current:** The data is pertinent to the previous year.
-
-5.  **Cited:** The data is trustworthy and referenced from the source in the preceding paragraph.
-
-#### 2.3: Data License
-
-The data is maintained and made available by [Motivate International Inc](https://divvybikes.com/data-license-agreement).
+The data can be accessed [Here](https://www.mavenanalytics.io/data-playground?page=4&pageSize=5), "Pizza Place Sales". My focus will be on the data spanning
+from January 2015 to December 2015.
 
 ------------------------------------------------------------------------
 
@@ -416,14 +397,9 @@ This query provides insights into customer preferences for pizza types:
 
 ------------------------------------------------------------------------
 
-### Data visualization
-
-
-------------------------------------------------------------------------
-
 ### Findings
 
-#### 5.1: Findings of my analysis
+#### 5.1: Analysis Findings
 
 Throughout the analysis, several key findings emerge:
 
