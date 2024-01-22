@@ -125,14 +125,14 @@ This dataset contains four tables in CSV format that are connected to each other
 
 1. **order_details:**
    
-The first query retrieves all distinct rows to identify any duplications. The second query checks for null values. After examining both, I discovered that
-the data in this table is suitable for use, with consistent row counts before and after these checks — 48,620 rows.
+The initial query retrieves all distinct rows to identify any duplications, while the second query checks for null values. Upon examining both, I determined
+that the data in this table is suitable for use, maintaining consistent row counts before and after these checks — 48,620 rows.
 
 ```sql         
 SELECT
   DISTINCT *
 FROM
-  `tangential-box-405116.PizzaPlaceSales.order_details`
+  `PizzaPlaceSales.order_details`
 ```
 ```sql 
 SELECT *
@@ -145,14 +145,14 @@ WHERE order_details_id IS NULL
 
 2. **orders:**
 
-The same process was applied to the table as before, yielding consistent results. The data is deemed suitable, maintaining an unchanged number of rows both
-before and after the checks — 21,350 rows.
+The identical process was applied to the table as previously, producing consistent results. The data remains deemed suitable, with an unaltered number of
+rows both before and after the checks—21,350 rows.
 
 ```sql         
 SELECT
   DISTINCT *
 FROM
-  `tangential-box-405116.PizzaPlaceSales.orders`
+  `PizzaPlaceSales.orders`
 ```
 ```sql 
 SELECT *
@@ -171,14 +171,14 @@ duplications, and the result remained consistent.
 SELECT
   DISTINCT *
 FROM
-  `tangential-box-405116.PizzaPlaceSales.pizza_prices`
+  `PizzaPlaceSales.pizza_prices`
 ```
 
 4. **menu:**
 
-In this table, there are 33 rows. Upon inspection, I confirmed the absence of any null values or duplications. Subsequently, I created a new table and
-modified its name. Each column header was changed to a meaningful name, and I removed the first row containing random values that could potentially disrupt
-subsequent analyses.
+In this table, there are 33 rows. Upon inspection, I verified the absence of any null values or duplications. Following this, I created a new table, modified
+its name, and renamed each column header to a meaningful identifier. Additionally, I eliminated the first row, which contained random values that could
+potentially interfere with subsequent analyses.
 
 ```sql         
 CREATE TABLE PizzaPlaceSales.menu AS
@@ -216,7 +216,7 @@ SELECT
 FROM
    `PizzaPlaceSales.orders`
 ```
-We observe a total of 21,350 orders throughout the entire year, resulting in an average of 59.64 orders per day.
+We recorded a total of 21,350 orders over the entire year, averaging 59.64 orders per day.
 
 ```sql
 SELECT
@@ -253,7 +253,7 @@ SELECT
 FROM
   `PizzaPlaceSales.order_details`
 ```
-The results to this query show us that the average number of pizzas for each delivery are 1.02.
+The results of this query show us that the average number of pizzas for each delivery is 1.02.
 
 ```sql
 SELECT
@@ -267,7 +267,7 @@ ORDER BY
   total_sold DESC
 LIMIT 10;
 ```
-After running this query, we found out that the bestsellers pizzas are:
+After executing this query, we discovered the best-selling pizzas to be:
 1. big_meat_s - 1914
 2. thai_ckn_l - 1410
 3. five_cheese_l - 1409
@@ -279,7 +279,8 @@ After running this query, we found out that the bestsellers pizzas are:
 9. bbq_ckn_l - 992
 10. bbq_ckn_m - 956
 
-The next question was **"How much money did we make this year? Can we indentify any seasonality in the sales?"**. in order to answer it, I wrote those querys:
+The next question posed was, **"How much money did we make this year? Can we identify any seasonality in the sales?"**. To address this inquiry, I formulated
+the following queries:
 
 ```sql
 SELECT
@@ -291,7 +292,7 @@ JOIN
 ON
   od.pizza_id = pp.pizza_id
 ```
-The total revenue of the entire year is 817,860.05$.
+The total revenue for the entire year is $817,860.05.
 
 ```sql
 SELECT
@@ -305,7 +306,7 @@ GROUP BY
 ORDER BY
   year, month;
 ```
-After running this query, we recive those results:
+After running this query, we receive the following results:
 1. January - 1845
 2. February - 1685
 3. March - 1840
@@ -319,7 +320,8 @@ After running this query, we recive those results:
 11. November - 1792
 12. December -1680
 
-In order to answer the last question, **"Are there any pizzas we should take of the menu, or any promotions we could leverage?"**, I ran this query:
+In addressing the final question, **"Are there any pizzas we should remove from the menu, or any promotions we could leverage?"**, I executed the following
+query:
 
 ```sql
 SELECT
@@ -333,14 +335,14 @@ ORDER BY
   total_sold ASC
 LIMIT 5;
 ```
-After running this query, we found out that the least ordered pizzas are:
+After executing this query, it was determined that the pizzas with the lowest order volumes are:
 1. the_greek_xxl - 28
 2. green_garden_l - 95
 3. ckn_alfredo_s - 96
 4. calabrese_s - 99
 5. mexicana_s _ 162
 
-To understant more the market needs, I examined some more ordering patterns.
+To better understand the market needs, I analyzed additional ordering patterns.
 
 ```sql
 WITH PizzaSizeCounts AS (
@@ -371,7 +373,7 @@ FROM
 CROSS JOIN
   TotalPizzaCount tpc;
 ```
-This query shows us the customer preferences regarding the size of their pizza.
+This query provides insights into customer preferences concerning the size of their pizzas:
 1. L, 18526 Units, 38.1%
 2. M, 15385 Units, 31.64%
 3. S, 14137 Units, 29.08%
@@ -406,7 +408,7 @@ SELECT
 FROM
   PizzaCounts;
   ```
-From this query we can learn the customer preferences regarding the pizza type:
+This query provides insights into customer preferences for pizza types:
 1. Veggie, 11449 Units, 23.55%
 2. Classic, 14007 Units, 28.81%
 3. Supreme, 11777 Units, 24.22%
