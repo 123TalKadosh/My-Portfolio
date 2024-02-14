@@ -1,0 +1,51 @@
+# Install and load necessary packages
+install.packages(c("readr", "tidytext", "dplyr", "ggplot2"))
+library(readr)
+library(tidytext)
+library(dplyr)
+library(ggplot2)
+
+# Create an empty list to store the love letters
+love_letters_list <- list()
+
+# Read love letters into the list
+for (i in 0:87) {
+  file_path <- paste0("Desktop/LoveLetters/", i, ".txt")
+  love_letter <- read_file(file_path)
+  love_letters_list[[i + 1]] <- tibble(value = love_letter)
+}
+
+# Combine the love letters into a single tibble
+data <- bind_rows(love_letters_list, .id = "letter_id")
+
+# Load stop words
+data(stop_words)
+
+# Tokenize and tidy the data
+tidy_data <- data %>%
+  unnest_tokens(input = value, output = word, token = "words") %>%
+  anti_join(stop_words) %>%
+  count(word, sort = TRUE)
+
+# Filter out specific words
+tidy_data <- tidy_data %>%
+  filter(word != "love") %>%
+  filter(word != "heart")
+  
+# Display top N words
+N <- 30
+topN <- tidy_data %>%
+  slice_max(n, n = N, with_ties = FALSE)
+
+# Create a bar plot
+ggplot(data = topN, aes(x = reorder(word, n), y = n, fill = n)) +
+  geom_col(color = "white") +
+  scale_fill_gradient(low = "lightpink", high = "darkred") +
+  coord_flip() +
+  labs(
+    title = "Love Letters Analysis",
+    subtitle = paste("Based on word prevalence, the most used 30 words are:"),
+    x = "Words",
+    y = "Frequency"
+  ) +
+  theme_minimal()
