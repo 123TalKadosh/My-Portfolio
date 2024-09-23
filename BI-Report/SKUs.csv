@@ -1,0 +1,6 @@
+ID,Name,Type,Weight,Volume_in_cm3
+1,Postal Envelope,Packaging,17,1.27
+2,DHL Packaging,Packaging,24,2.45
+3,Small Box,Packaging,34,8
+4,Medium Box,Packaging,54,16.4
+5,Large Box,Packaging,98,22.5
