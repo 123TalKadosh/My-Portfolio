@@ -6,7 +6,7 @@ The **SKU Profitability and Usage Analysis for 2022** is a comprehensive report 
 
 The objective of this report is to identify inefficiencies within the packaging portfolio and provide actionable insights to optimize performance and enhance customer satisfaction. By utilizing data from SwiftHaul Logistics’s Warehouse Management System (WMS), the report evaluates SKU usage patterns, associated costs, revenues, and customer-specific behaviors, along with seasonal trends.
 
-To view the analysis, you can either browse through Google Chrome or download the PDF.
+**To view the analysis, you can either browse through Google Chrome or download the PDF.**
 
 ---
 
