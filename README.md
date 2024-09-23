@@ -1,4 +1,4 @@
-## Welcome to My GitHub Portfolio
+## Welcome to My Portfolio
 
 This portfolio showcases a curated selection of my projects, demonstrating my expertise in R, SQL, Tableau, and Python. Each project reflects my commitment to delivering impactful, data-driven solutions.
 
