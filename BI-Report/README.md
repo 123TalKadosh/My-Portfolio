@@ -1,6 +1,6 @@
-# SKU Profitability and Usage Analysis for 2022
+## SwiftHaul Logistics - SKU Profitability and Usage Analysis for 2022
 
-## Project Overview
+### Project Overview
 
 The **SKU Profitability and Usage Analysis for 2022** is a comprehensive report conducted by SwiftHaul Logistics Packaging. This analysis examines the SKU (Stock Keeping Units) portfolio with a focus on usage and profitability.
 
