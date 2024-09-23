@@ -1,23 +1,24 @@
 # Portfolio
-Welcome to my GitHub portfolio!
 
-Here, you'll find a collection of projects showcasing my skills in **R**, **SQL**, and **Tableau**. Each project is a testament to myproficiency in these
-areas and
-reflects my dedication to delivering insightful data-driven solutions.
+## Welcome to My GitHub Portfolio
 
+This portfolio showcases a curated selection of my projects, demonstrating my expertise in R, SQL, Tableau, and Python. Each project reflects my commitment to delivering impactful, data-driven solutions.
 
-## How to Explore
+## Projects
 
-Feel free to click on each project's link to explore the code, visualizations, and documentation. This portfolio is a dynamic representation of my
-capabilities, and I am constantly updating it with new projects and improvements.
+### SQL:
+- **BI Report**: An insightful business analysis project utilizing SQL to derive meaningful insights from data.
+- **Pizza Place Sales**: A concise SQL analysis evaluating sales data for a pizza restaurant, highlighting performance metrics.
 
+### R:
+- **Cyclistic & GlobalTMP**: A comprehensive analysis leveraging R to tackle various data-related challenges.
 
-## Contact
+### Tableau:
+- **HR Analytics Dashboard**: A visually engaging dashboard created with Tableau, designed to provide key HR metrics and insights.
 
-If you have any questions, feedback, or collaboration inquiries, please don't hesitate to reach out to me. You can contact me through Linkedin.
-Thank you for visiting my GitHub portfolio!
+### Python:
+- **NYC Airbnb**: An in-depth analysis of Airbnb listings in New York City, performed using Python to uncover trends and patterns.
 
-#### Tal Kadosh
+---
 
-
-
+**Tal Kadosh**
